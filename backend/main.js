@@ -1,7 +1,9 @@
 const express = require('express')
 const db = require('./dataBaseConfig.js')
+const productRouter = require('./routes/productRoutes.js')
 
 let app  = express()
+app.use(express.json())
 
 db.connect((err)=>{
       if(err) throw err;
@@ -27,6 +29,8 @@ db.query(productTableQuery, (err, result)=>{
       }
 } )
 
+
+app.use('/api', productRouter)
 
 app.listen(3000, ()=>{
       console.log("server is running....")
