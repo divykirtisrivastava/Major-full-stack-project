@@ -1,9 +1,11 @@
 const express = require('express')
+const cors = require('cors')
 const db = require('./dataBaseConfig.js')
 const productRouter = require('./routes/productRoutes.js')
 
 let app  = express()
 app.use(express.json())
+app.use(cors())
 
 db.connect((err)=>{
       if(err) throw err;
