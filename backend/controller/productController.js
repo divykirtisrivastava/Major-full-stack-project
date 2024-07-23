@@ -28,3 +28,16 @@ exports.getProduct = (req, res)=>{
         }
     })
 }
+
+exports.deleteProduct = (req, res)=>{
+    let id = req.params.id
+
+    let sql = "delete from product where id = ?"
+
+    db.query(sql, [id], (err, result)=>{
+        if(err) throw err
+        else{
+            res.send("data deleted")
+        }
+    })
+}
