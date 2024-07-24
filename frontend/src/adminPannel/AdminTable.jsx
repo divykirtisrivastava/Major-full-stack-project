@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function AdminTable() {
     let [data, setData] = useState([])
@@ -26,9 +27,8 @@ export default function AdminTable() {
       <section className="mx-auto w-full max-w-7xl px-4 py-4">
       
         <div className="mt-6 flex flex-col">
-          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="-mx-4 my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-              <div className="overflow-hidden border border-gray-200 md:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
@@ -98,7 +98,9 @@ export default function AdminTable() {
                           {data.productRating}
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                        <button type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</button>
+                        <Link
+                        to="/view"
+                        type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">View</Link>
 
                         <button type="button" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                         onClick={()=>deleteData(data.id)}
@@ -114,7 +116,7 @@ export default function AdminTable() {
               </div>
             </div>
           </div>
-        </div>
+        
       </section>
     </>
   )

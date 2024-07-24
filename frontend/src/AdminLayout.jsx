@@ -1,15 +1,12 @@
 import React from 'react'
 import AdminNavbar from './adminPannel/AdminNavbar'
-import AdminTable from './adminPannel/AdminTable'
+import {Outlet} from 'react-router-dom'
 
-export default function App() {
+export default function AdminLayout() {
   return (
     <div>
       <AdminNavbar/>
-      <AdminTable/>
-
-
-      
+      <Outlet/>
     </div>
   )
 }

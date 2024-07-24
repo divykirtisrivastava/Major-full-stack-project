@@ -1,10 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import AdminLayout from './AdminLayout'
+import AdminTable from './adminPannel/AdminTable'
+import ViewProduct from './adminPannel/ViewProduct'
+import AddProduct from './adminPannel/AddProduct'
+
+
+let router  = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<AdminLayout/>}>
+      <Route path='' element={<AdminTable/>} />
+      <Route path='/view' element={<ViewProduct/>} />
+      <Route path='/addProduct' element={<AddProduct/>} />
+    </Route>
+  )
+)
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
