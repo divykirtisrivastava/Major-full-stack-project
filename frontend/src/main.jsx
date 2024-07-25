@@ -12,7 +12,7 @@ let router  = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<AdminLayout/>}>
       <Route path='' element={<AdminTable/>} />
-      <Route path='/view' element={<ViewProduct/>} />
+      <Route path='/view/:id' element={<ViewProduct/>} />
       <Route path='/addProduct' element={<AddProduct/>} />
     </Route>
   )
