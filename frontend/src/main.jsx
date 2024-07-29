@@ -6,6 +6,7 @@ import AdminLayout from './AdminLayout'
 import AdminTable from './adminPannel/AdminTable'
 import ViewProduct from './adminPannel/ViewProduct'
 import AddProduct from './adminPannel/AddProduct'
+import UpdateProduct from './adminPannel/UpdateProduct'
 
 
 let router  = createBrowserRouter(
@@ -13,6 +14,7 @@ let router  = createBrowserRouter(
     <Route path='/' element={<AdminLayout/>}>
       <Route path='' element={<AdminTable/>} />
       <Route path='/view/:id' element={<ViewProduct/>} />
+      <Route path='/update/:id' element={<UpdateProduct/>} />
       <Route path='/addProduct' element={<AddProduct/>} />
     </Route>
   )
