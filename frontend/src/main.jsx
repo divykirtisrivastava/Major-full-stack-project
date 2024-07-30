@@ -7,16 +7,23 @@ import AdminTable from './adminPannel/AdminTable'
 import ViewProduct from './adminPannel/ViewProduct'
 import AddProduct from './adminPannel/AddProduct'
 import UpdateProduct from './adminPannel/UpdateProduct'
+import ClientLayout from './ClientLayout'
 
 
 let router  = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<AdminLayout/>}>
+   <>
+   <Route path='/' element={<ClientLayout/>} >
+    
+   </Route>
+
+    <Route path='/admin' element={<AdminLayout/>}>
       <Route path='' element={<AdminTable/>} />
-      <Route path='/view/:id' element={<ViewProduct/>} />
-      <Route path='/update/:id' element={<UpdateProduct/>} />
-      <Route path='/addProduct' element={<AddProduct/>} />
+      <Route path='/admin/view/:id' element={<ViewProduct/>} />
+      <Route path='/admin/update/:id' element={<UpdateProduct/>} />
+      <Route path='/admin/addProduct' element={<AddProduct/>} />
     </Route>
+   </>
   )
 )
 
