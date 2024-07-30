@@ -35,7 +35,7 @@ export default function UpdateProduct() {
 async function handleSubmit(e){
   e.preventDefault()
 
-  let result = await axios.post('http://localhost:3000/api/productSave', data)
+  let result = await axios.put(`http://localhost:3000/api/updateProduct/${id}`, data)
  navigation('/')
 }
 
