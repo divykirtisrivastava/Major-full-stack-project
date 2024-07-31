@@ -5,6 +5,7 @@ const productRouter = require('./routes/productRoutes.js')
 
 let app  = express()
 app.use(express.json())
+app.use(express.static('uploads'))
 app.use(cors())
 
 db.connect((err)=>{
@@ -22,6 +23,7 @@ let productTableQuery = `CREATE TABLE if not exists product (
   productBrand VARCHAR(255) NULL,
   productPrice VARCHAR(255) NULL,
   productRating VARCHAR(255) NULL,
+  image VARCHAR(255) NULL,
   PRIMARY KEY (id));`
 
 db.query(productTableQuery, (err, result)=>{
