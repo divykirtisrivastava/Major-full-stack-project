@@ -8,13 +8,14 @@ import ViewProduct from './adminPannel/ViewProduct'
 import AddProduct from './adminPannel/AddProduct'
 import UpdateProduct from './adminPannel/UpdateProduct'
 import ClientLayout from './ClientLayout'
+import Home from './clientPannel/Home'
 
 
 let router  = createBrowserRouter(
   createRoutesFromElements(
    <>
    <Route path='/' element={<ClientLayout/>} >
-    
+    <Route path='' element={<Home/>}/>
    </Route>
 
     <Route path='/admin' element={<AdminLayout/>}>
