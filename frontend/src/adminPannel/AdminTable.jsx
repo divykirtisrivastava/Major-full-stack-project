@@ -76,7 +76,7 @@ export default function AdminTable() {
                             <div className="h-10 w-10 flex-shrink-0">
                               <img
                                 className="h-10 w-10 rounded-full object-cover"
-                                src=""
+                                src={`http://localhost:3000/${data.image}`}
                                 alt="not found"
                               />
                             </div>

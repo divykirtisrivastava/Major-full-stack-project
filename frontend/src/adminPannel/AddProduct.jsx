@@ -7,23 +7,40 @@ export default function AddProduct() {
 
   let navigation =  useNavigate()
 
-  let [data, sedtData] = useState({
-    productBrand: "",
-    productType: "",
-    productPrice: "",
-    productRating: "",
-  })
-  let {productBrand, productType, productPrice, productRating} = data
+  // let [data, sedtData] = useState({
+  //   productBrand: "",
+  //   productType: "",
+  //   productPrice: "",
+  //   productRating: "",
+  //   image: ""
+  // })
+  // let {productBrand, productType, productPrice, productRating} = data
 
-  function handleChange(e){
-    sedtData({...data, [e.target.name]: e.target.value})
-  }
+  // function handleChange(e){
+  //   sedtData({...data, [e.target.name]: e.target.value})
+  // }
 
+  let [productBrand, setProductBrand] = useState("")
+  let [productType, setProductType] = useState("")
+  let [productPrice, setProductPrice] = useState("")
+  let [productRating, setProductRating] = useState("")
+  let [image, setImage] = useState(null)
 async function handleSubmit(e){
   e.preventDefault()
 
-  let result = await axios.post('http://localhost:3000/api/productSave', data)
- navigation('/')
+  let data = new FormData()
+  data.append('productBrand', productBrand)
+  data.append('productType', productType)
+  data.append('productPrice', productPrice)
+  data.append('productRating', productRating)
+  data.append('image', image)
+
+  let result = await axios.post('http://localhost:3000/api/productSave', data, {
+    headers:{
+      'Content-Type': "multipart/form-data"
+    }
+  })
+ navigation('/admin')
 }
 
   return (
@@ -46,8 +63,7 @@ async function handleSubmit(e){
                       type="text"
                       placeholder="Product Brand"
                       name='productBrand'
-                      value={productBrand}
-                    onChange={handleChange}
+                    onChange={(e)=>setProductBrand(e.target.value)}
                       id="name"
                     ></input>
                   </div>
@@ -61,10 +77,9 @@ async function handleSubmit(e){
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="text"
-                      placeholder="Product Brand"
+                      placeholder="Product Type"
                       name='productType'
-                      value={productType}
-                    onChange={handleChange}
+                      onChange={(e)=>setProductType(e.target.value)}
                       id="name"
                     ></input>
                   </div>
@@ -80,8 +95,8 @@ async function handleSubmit(e){
                       type="text"
                       placeholder="Product Price"
                       name='productPrice'
-                      value={productPrice}
-                    onChange={handleChange}
+                      onChange={(e)=>setProductPrice(e.target.value)}
+
                       id="name"
                     ></input>
                   </div>
@@ -97,8 +112,25 @@ async function handleSubmit(e){
                       type="text"
                       placeholder="Product Rating"
                       name='productRating'
-                      value={productRating}
-                    onChange={handleChange}
+                      onChange={(e)=>setProductRating(e.target.value)}
+
+                      id="name"
+                    ></input>
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="name" className="text-base font-medium text-gray-900">
+                    {' '}
+                   Upload Product Image{' '}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      type="file"
+                      name='image'
+                      accept='images/*'
+                      onChange={(e)=>setImage(e.target.files[0])}
+
                       id="name"
                     ></input>
                   </div>
