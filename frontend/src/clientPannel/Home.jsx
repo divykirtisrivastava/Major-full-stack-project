@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BarChart, Wallet, Newspaper, BellRing, Paperclip, Brush, Wrench } from 'lucide-react'
+import { BarChart, Wallet, Newspaper, BellRing, Paperclip, Brush, Wrench, ShoppingBag } from 'lucide-react'
 import axios from 'axios'
 
 export default function Home() {
@@ -12,7 +12,16 @@ export default function Home() {
     useEffect(()=>{
         getData()
     }, [])
-
+ async function filterShoes(){
+  let result = await axios.get('http://localhost:3000/api/getProduct')
+  let final = result.data.filter((item)=> item.productType == "shoes")
+  setData(final)
+}
+ async function filterShirt(){
+  let result = await axios.get('http://localhost:3000/api/getProduct')
+  let final = result.data.filter((item)=> item.productType == "shirt")
+  setData(final)
+}
   return (
     <>
     <aside className="flex fixed h-screen w-64 flex-col overflow-y-auto border-r bg-black px-5 py-8">
@@ -20,71 +29,38 @@ export default function Home() {
       <div className="mt-6 flex flex-1 flex-col justify-between">
         <nav className="-mx-3 space-y-6 ">
           <div className="space-y-3 ">
-            <label className="px-3 text-xs font-semibold uppercase text-white">analytics</label>
-            <a
+            <label className="px-3 text-xl font-semibold uppercase text-white">Fiter By Type</label>
+            <button
+            onClick={getData}
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
               href="#"
             >
-              <BarChart className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Dashboard</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+              <span className="mx-2 text-xl font-medium">All</span>
+            </button>
+            <button
+            onClick={filterShoes}
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
               href="#"
             >
-              <Wallet className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Sales</span>
-            </a>
+              <span className="mx-2 text-xl font-medium">Shoes</span>
+            </button>
+            <button
+            onClick={filterShirt}
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
+              href="#"
+            >
+              <span className="mx-2 text-xl font-medium">Shirt</span>
+            </button>
+           
           </div>
-          <div className="space-y-3 ">
-            <label className="px-3 text-xs font-semibold uppercase text-white">content</label>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Newspaper className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Blogs</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <BellRing className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Notifications</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Paperclip className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Checklists</span>
-            </a>
-          </div>
-
-          <div className="space-y-3 ">
-            <label className="px-3 text-xs font-semibold uppercase text-white">Customization</label>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Brush className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Themes</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Wrench className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Setting</span>
-            </a>
-          </div>
+       
         </nav>
       </div>
     </aside>
 
     <div className="card absolute left-[300px] top-[80px] flex gap-[20px] flex-wrap">
     {data.map((data)=>(
-        <div className="w-[300px] rounded-md border">
+        <div className="w-[300px] rounded-md border" key={data.id}>
         <img
           src={`http://localhost:3000/${data.image}`}
           alt="Laptop"

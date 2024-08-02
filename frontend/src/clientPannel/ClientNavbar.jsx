@@ -1,7 +1,7 @@
 'use client'
 
-import React from 'react'
-import { Menu, X } from 'lucide-react'
+import React, { useState } from 'react'
+import { Menu, Moon, Sun, X } from 'lucide-react'
 
 const menuItems = [
   {
@@ -25,8 +25,9 @@ export default function ClientNavbar() {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  let [flag , setflag] = useState(false)
   return (
-    <div className="fixed z-50 w-full bg-white">
+    <div className={`fixed z-50 w-full ${flag ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
           <span>
@@ -43,7 +44,7 @@ export default function ClientNavbar() {
               />
             </svg>
           </span>
-          <span className="font-bold">DevUI</span>
+          <span className="font-bold">HANUMANT</span>
         </div>
         <div className="hidden lg:block">
           <ul className="inline-flex space-x-8">
@@ -51,7 +52,7 @@ export default function ClientNavbar() {
               <li key={item.name}>
                 <a
                   href={item.href}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className={`text-sm font-semibold ${flag? 'text-white' : 'text-gray-800'} hover:text-gray-900`}
                 >
                   {item.name}
                 </a>
@@ -59,13 +60,16 @@ export default function ClientNavbar() {
             ))}
           </ul>
         </div>
-        <div className="hidden lg:block">
+        <div className="flex w-[150px] justify-between items-center">
           <button
             type="button"
-            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            className={`rounded-md  px-3 py-2 text-sm font-semibold ${flag ? 'bg-white text-black' : 'bg-black text-white'} shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
           >
             Button text
           </button>
+          <div onClick={()=>setflag(!flag)}>
+            {flag ?  <Moon/> :  <Sun/>}
+          </div>
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
