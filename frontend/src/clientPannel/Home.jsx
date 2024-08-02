@@ -22,6 +22,11 @@ export default function Home() {
   let final = result.data.filter((item)=> item.productType == "shirt")
   setData(final)
 }
+ async function filterbtwSeven(){
+  let result = await axios.get('http://localhost:3000/api/getProduct')
+  let final = result.data.filter((item)=> item.productPrice >=1000 && item.productPrice <= 7000)
+  setData(final)
+}
   return (
     <>
     <aside className="flex fixed h-screen w-64 flex-col overflow-y-auto border-r bg-black px-5 py-8">
@@ -36,6 +41,31 @@ export default function Home() {
               href="#"
             >
               <span className="mx-2 text-xl font-medium">All</span>
+            </button>
+            <button
+            onClick={filterShoes}
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
+              href="#"
+            >
+              <span className="mx-2 text-xl font-medium">Shoes</span>
+            </button>
+            <button
+            onClick={filterShirt}
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
+              href="#"
+            >
+              <span className="mx-2 text-xl font-medium">Shirt</span>
+            </button>
+           
+          </div>
+          <div className="space-y-3 ">
+            <label className="px-3 text-xl font-semibold uppercase text-white">Fiter By Price Range</label>
+            <button
+            onClick={filterbtwSeven}
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-200 transition-colors duration-300 hover:bg-gray-50 hover:text-gray-700"
+              href="#"
+            >
+              <span className="mx-2 text-xl font-medium">1000 - 7000Rs</span>
             </button>
             <button
             onClick={filterShoes}
