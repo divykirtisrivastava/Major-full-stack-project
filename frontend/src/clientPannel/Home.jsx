@@ -27,6 +27,11 @@ export default function Home() {
   let final = result.data.filter((item)=> item.productPrice >=1000 && item.productPrice <= 7000)
   setData(final)
 }
+
+async function handleCart(data) {
+  await axios.post('http://localhost:3000/api/cartSave', data)
+  alert("item saved into cart..")
+}
   return (
     <>
     <aside className="flex fixed h-screen w-64 flex-col overflow-y-auto border-r bg-black px-5 py-8">
@@ -104,6 +109,7 @@ export default function Home() {
         
           <button
             type="button"
+            onClick={()=>handleCart(data)}
             className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
             Add to Cart

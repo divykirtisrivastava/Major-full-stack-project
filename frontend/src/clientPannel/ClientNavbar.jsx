@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { Menu, Moon, Sun, X } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const menuItems = [
   {
@@ -61,12 +62,13 @@ export default function ClientNavbar() {
           </ul>
         </div>
         <div className="flex w-[150px] justify-between items-center">
-          <button
+          <Link
             type="button"
+            to='/cart'
             className={`rounded-md  px-3 py-2 text-sm font-semibold ${flag ? 'bg-white text-black' : 'bg-black text-white'} shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
           >
-            Button text
-          </button>
+            CART
+          </Link>
           <div onClick={()=>setflag(!flag)}>
             {flag ?  <Moon/> :  <Sun/>}
           </div>

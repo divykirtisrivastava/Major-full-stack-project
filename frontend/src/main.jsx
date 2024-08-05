@@ -9,6 +9,7 @@ import AddProduct from './adminPannel/AddProduct'
 import UpdateProduct from './adminPannel/UpdateProduct'
 import ClientLayout from './ClientLayout'
 import Home from './clientPannel/Home'
+import Cart from './clientPannel/Cart'
 
 
 let router  = createBrowserRouter(
@@ -16,6 +17,7 @@ let router  = createBrowserRouter(
    <>
    <Route path='/' element={<ClientLayout/>} >
     <Route path='' element={<Home/>}/>
+    <Route path='/cart' element={<Cart/>}/>
    </Route>
 
     <Route path='/admin' element={<AdminLayout/>}>
