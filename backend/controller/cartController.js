@@ -29,3 +29,16 @@ exports.getCart = (req, res)=>{
         }
     })
 }
+
+exports.deleteCart = (req, res)=>{
+    let id = req.params.id
+
+    let sql = "delete from cart where id = ?"
+
+    db.query(sql, [id], (err, result)=>{
+        if(err) throw err
+        else{
+            res.send("data deleted")
+        }
+    })
+}

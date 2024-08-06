@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Trash, Heart } from 'lucide-react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 
 export default function Cart() {
@@ -13,6 +14,18 @@ export default function Cart() {
     useEffect(()=>{
         getData()
     }, [])
+
+    async function deleteData(id){
+
+      let flag  =  confirm("Are U sure to delete")
+  
+       if(flag == true){
+        await axios.delete(`http://localhost:3000/api/deleteCart/${id}`)
+        getData()
+       }
+      }
+
+      let price = data.reduce((acc , current)=> acc+ JSON.parse(current.productPrice), 0)
   return (
     <div className="mx-auto flex max-w-3xl flex-col space-y-4 p-6 px-2 sm:p-10 sm:px-2">
       <h2 className="text-3xl font-bold">Your cart</h2>
@@ -40,7 +53,9 @@ export default function Cart() {
                   </div>
                 </div>
                 <div className="flex divide-x text-sm">
-                  <button type="button" className="flex items-center space-x-2 px-2 py-1 pl-0">
+                  <button
+                  onClick={()=>deleteData(data.id)}
+                  type="button" className="flex items-center space-x-2 px-2 py-1 pl-0">
                     <Trash size={16} />
                     <span>Remove</span>
                   </button>
@@ -57,16 +72,17 @@ export default function Cart() {
       <div className="space-y-1 text-right">
         <p>
           Total amount:
-          <span className="font-semibold"> ₹48,967</span>
+          <span className="font-semibold"> ₹{price}</span>
         </p>
       </div>
       <div className="flex justify-end space-x-4">
-        <button
+        <Link
           type="button"
+          to='/'
           className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
           Back to shop
-        </button>
+        </Link>
         <button
           type="button"
           className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
