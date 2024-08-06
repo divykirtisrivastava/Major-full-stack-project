@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BarChart, Wallet, Newspaper, BellRing, Paperclip, Brush, Wrench, ShoppingBag } from 'lucide-react'
 import axios from 'axios'
+import UserContext from '../context/UserContext'
 
 export default function Home() {
     let [data, setData] = useState([])
@@ -11,6 +12,7 @@ export default function Home() {
     }
     useEffect(()=>{
         getData()
+        getCart()
     }, [])
  async function filterShoes(){
   let result = await axios.get('http://localhost:3000/api/getProduct')
@@ -31,7 +33,17 @@ export default function Home() {
 async function handleCart(data) {
   await axios.post('http://localhost:3000/api/cartSave', data)
   alert("item saved into cart..")
+  getCart()
 }
+
+//cart item count
+let {setCartList} = useContext(UserContext)
+
+    async function getCart(){
+        let result = await axios.get('http://localhost:3000/api/getCart')
+        
+        setCartList(result.data.length)
+    }
   return (
     <>
     <aside className="flex fixed h-screen w-64 flex-col overflow-y-auto border-r bg-black px-5 py-8">

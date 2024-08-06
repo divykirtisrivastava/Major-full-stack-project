@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Trash, Heart } from 'lucide-react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import UserContext from '../context/UserContext'
 
 
 export default function Cart() {
     let [data, setData] = useState([])
+    let {setCartList} = useContext(UserContext)
 
     async function getData(){
         let result = await axios.get('http://localhost:3000/api/getCart')
         setData(result.data)
+        setCartList(result.data.length)
     }
     useEffect(()=>{
         getData()
     }, [])
+    // console.log(data.length)
 
     async function deleteData(id){
 

@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Menu, Moon, Sun, X } from 'lucide-react'
+import React, { useContext, useState } from 'react'
+import { Menu, Moon, ShoppingCart, Sun, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import UserContext from '../context/UserContext'
 
 const menuItems = [
   {
@@ -27,6 +28,7 @@ export default function ClientNavbar() {
   }
 
   let [flag , setflag] = useState(false)
+  let {cartList} = useContext(UserContext)
   return (
     <div className={`fixed z-50 w-full ${flag ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -65,9 +67,10 @@ export default function ClientNavbar() {
           <Link
             type="button"
             to='/cart'
-            className={`rounded-md  px-3 py-2 text-sm font-semibold ${flag ? 'bg-white text-black' : 'bg-black text-white'} shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
+            className={`rounded-md relative  px-3 py-2 text-sm font-semibold ${flag ? 'text-white' : 'text-black'} shadow-sm hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
           >
-            CART
+            <ShoppingCart/>
+            <span className='absolute top-[-10px] right-[10px]  text-red-600 text-xl'>{cartList}</span>
           </Link>
           <div onClick={()=>setflag(!flag)}>
             {flag ?  <Moon/> :  <Sun/>}
