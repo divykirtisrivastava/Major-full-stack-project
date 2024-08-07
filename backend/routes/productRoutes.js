@@ -13,5 +13,7 @@ router.get('/getProductById/:id', productController.getProductById)
 
 router.put('/updateProduct/:id', productController.updateProduct)
 
+router.get('/search/:inp', productController.search)
+
 module.exports = router;
 

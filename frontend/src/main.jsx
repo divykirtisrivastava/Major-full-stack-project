@@ -10,6 +10,7 @@ import UpdateProduct from './adminPannel/UpdateProduct'
 import ClientLayout from './ClientLayout'
 import Home from './clientPannel/Home'
 import Cart from './clientPannel/Cart'
+import ClientRegister from './clientPannel/ClientRegister'
 
 
 let router  = createBrowserRouter(
@@ -18,6 +19,7 @@ let router  = createBrowserRouter(
    <Route path='/' element={<ClientLayout/>} >
     <Route path='' element={<Home/>}/>
     <Route path='/cart' element={<Cart/>}/>
+    <Route path='/register' element={<ClientRegister/>}/>
    </Route>
 
     <Route path='/admin' element={<AdminLayout/>}>

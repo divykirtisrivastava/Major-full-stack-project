@@ -70,7 +70,7 @@ export default function ClientNavbar() {
             className={`rounded-md relative  px-3 py-2 text-sm font-semibold ${flag ? 'text-white' : 'text-black'} shadow-sm hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
           >
             <ShoppingCart/>
-            <span className='absolute top-[-10px] right-[10px]  text-red-600 text-xl'>{cartList}</span>
+            <span className='absolute top-[-10px] right-[10px]  text-red-600 text-xl'>{cartList ? cartList : ''}</span>
           </Link>
           <div onClick={()=>setflag(!flag)}>
             {flag ?  <Moon/> :  <Sun/>}
