@@ -11,6 +11,8 @@ import ClientLayout from './ClientLayout'
 import Home from './clientPannel/Home'
 import Cart from './clientPannel/Cart'
 import ClientRegister from './clientPannel/ClientRegister'
+import AdminLogin from './adminPannel/AdminLogin'
+import Protected from './Protected'
 
 
 let router  = createBrowserRouter(
@@ -23,10 +25,19 @@ let router  = createBrowserRouter(
    </Route>
 
     <Route path='/admin' element={<AdminLayout/>}>
-      <Route path='' element={<AdminTable/>} />
+      <Route path='' element={
+        <Protected>
+          <AdminTable/>
+        </Protected>
+      } />
       <Route path='/admin/view/:id' element={<ViewProduct/>} />
       <Route path='/admin/update/:id' element={<UpdateProduct/>} />
-      <Route path='/admin/addProduct' element={<AddProduct/>} />
+      <Route path='/admin/addProduct' element={
+        <Protected>
+          <AddProduct/>
+        </Protected>
+      } />
+      <Route path='/admin/adminLogin' element={<AdminLogin/>} />
     </Route>
    </>
   )

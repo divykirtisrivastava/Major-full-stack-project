@@ -55,7 +55,14 @@ let {setCartList} = useContext(UserContext)
 // search Bar
 async function handleInp(){
   let result = await axios.get(`http://localhost:3000/api/search/${inp}`)
+  setData(result.data)
 }
+useEffect(()=>{
+  if(inp == ''){
+    getData()
+  }
+  handleInp()
+}, [inp])
 
   return (
     <>

@@ -8,6 +8,6 @@ export default function Protected({children}) {
   if(flag){
     return children
   }else{
-    return <Navigate to='/register'/>
+    return <Navigate to='/admin/adminLogin'/>
   }
 }
