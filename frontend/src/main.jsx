@@ -13,6 +13,7 @@ import Cart from './clientPannel/Cart'
 import ClientRegister from './clientPannel/ClientRegister'
 import AdminLogin from './adminPannel/AdminLogin'
 import Protected from './Protected'
+import ClientLogin from './clientPannel/ClientLogin'
 
 
 let router  = createBrowserRouter(
@@ -22,6 +23,7 @@ let router  = createBrowserRouter(
     <Route path='' element={<Home/>}/>
     <Route path='/cart' element={<Cart/>}/>
     <Route path='/register' element={<ClientRegister/>}/>
+    <Route path='/clientLogin' element={<ClientLogin/>}/>
    </Route>
 
     <Route path='/admin' element={<AdminLayout/>}>

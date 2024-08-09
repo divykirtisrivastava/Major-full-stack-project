@@ -3,6 +3,7 @@ const cors = require('cors')
 const db = require('./dataBaseConfig.js')
 const productRouter = require('./routes/productRoutes.js')
 const cartRouter = require('./routes/cartRoute.js')
+const clientRouter = require('./routes/clientRoute.js')
 
 let app  = express()
 app.use(express.json())
@@ -48,10 +49,26 @@ db.query(cartTableQuery, (err, result)=>{
             console.log("cart table created")
       }
 } )
+let clientTableQuery = `CREATE TABLE if not exists clientlist (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NULL,
+  email VARCHAR(255) NULL,
+  password VARCHAR(255) NULL,
+  phone VARCHAR(255) NULL,
+  image VARCHAR(255) NULL,
+  PRIMARY KEY (id));`
+
+db.query(clientTableQuery, (err, result)=>{
+      if(err) throw err
+      else{
+            console.log("clientlist table created")
+      }
+} )
 
 
 app.use('/api', productRouter)
 app.use('/api', cartRouter)
+app.use('/api', clientRouter)
 
 app.listen(3000, ()=>{
       console.log("server is running....")
