@@ -4,6 +4,7 @@ const db = require('./dataBaseConfig.js')
 const productRouter = require('./routes/productRoutes.js')
 const cartRouter = require('./routes/cartRoute.js')
 const clientRouter = require('./routes/clientRoute.js')
+const adminRouter = require('./routes/adminRoute.js')
 
 let app  = express()
 app.use(express.json())
@@ -69,6 +70,7 @@ db.query(clientTableQuery, (err, result)=>{
 app.use('/api', productRouter)
 app.use('/api', cartRouter)
 app.use('/api', clientRouter)
+app.use('/api', adminRouter)
 
 app.listen(3000, ()=>{
       console.log("server is running....")

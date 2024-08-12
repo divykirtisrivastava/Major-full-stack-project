@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navigate } from 'react-router-dom'
+import UserContext from './context/UserContext'
 
 export default function Protected({children}) {
     
-  let flag =  false
+  let {isAdminLogin} =  useContext(UserContext)
 
-  if(flag){
+  if(isAdminLogin){
     return children
   }else{
     return <Navigate to='/admin/adminLogin'/>
