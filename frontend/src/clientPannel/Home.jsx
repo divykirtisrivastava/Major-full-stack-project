@@ -7,6 +7,7 @@ import {  useNavigate } from 'react-router-dom'
 export default function Home() {
     let [data, setData] = useState([])
     let [inp, setInp] = useState('')
+    let {isClientLogin} =  useContext(UserContext)
     let navigation = useNavigate()
 
     async function getData(){
@@ -32,9 +33,9 @@ export default function Home() {
   let final = result.data.filter((item)=> item.productPrice >=1000 && item.productPrice <= 7000)
   setData(final)
 }
-let flag =  false
+
 async function handleCart(data) {
- if(flag){
+ if(isClientLogin){
   await axios.post('http://localhost:3000/api/cartSave', data)
   alert("item saved into cart..")
   getCart()

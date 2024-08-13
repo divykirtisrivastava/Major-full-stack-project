@@ -28,7 +28,12 @@ export default function ClientNavbar() {
   }
 
   let [flag , setflag] = useState(false)
-  let {cartList} = useContext(UserContext)
+  let {cartList, isClientLogin} = useContext(UserContext)
+
+  function handleLogout(){
+    window.location.reload()
+  }
+
   return (
     <div className={`fixed z-50 w-full ${flag ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
@@ -63,7 +68,7 @@ export default function ClientNavbar() {
             ))}
           </ul>
         </div>
-        <div className="flex w-[150px] justify-between items-center">
+        <div className="flex  gap-[50px] w-[350px] justify-evenly items-center">
           <Link
             type="button"
             to='/cart'
@@ -75,6 +80,8 @@ export default function ClientNavbar() {
           <div onClick={()=>setflag(!flag)}>
             {flag ?  <Moon/> :  <Sun/>}
           </div>
+          {isClientLogin ? <button onClick={handleLogout} className='p-2 bg-black text-white text-xl font-bold rounded'>Log Out</button> :
+          <Link  to='/clientLogin' className='p-2 bg-black text-white text-xl font-bold rounded'>Log in</Link>}
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
