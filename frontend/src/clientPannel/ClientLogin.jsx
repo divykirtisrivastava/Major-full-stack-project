@@ -5,7 +5,7 @@ import UserContext from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 
 export default function ClientLogin() {
-  let {setIsClientLogin} = useContext(UserContext)
+  let {setIsClientLogin, clientLogin} = useContext(UserContext)
   let navigation = useNavigate()
 
   let [data, setData] = useState({
@@ -20,13 +20,11 @@ export default function ClientLogin() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    let result = await axios.post('http://localhost:3000/api/clientLogin', data)
-    if(result.data == true){
-      setIsClientLogin(true)
-      navigation('/')
-    }else{
-      alert('u entered the wrong details...')
-    }
+  let result =  await clientLogin(data)
+  if(result){
+    setIsClientLogin(true)
+    navigation('/')
+  }
   }
   return (
     <section>

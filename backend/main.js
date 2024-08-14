@@ -1,5 +1,7 @@
 const express = require('express')
 const cors = require('cors')
+const dotenv = require('dotenv')
+dotenv.config()
 const db = require('./dataBaseConfig.js')
 const productRouter = require('./routes/productRoutes.js')
 const cartRouter = require('./routes/cartRoute.js')

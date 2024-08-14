@@ -71,7 +71,7 @@ export default function ClientNavbar() {
         <div className="flex  gap-[50px] w-[350px] justify-evenly items-center">
           <Link
             type="button"
-            to='/cart'
+            to='/cart'  
             className={`rounded-md relative  px-3 py-2 text-sm font-semibold ${flag ? 'text-white' : 'text-black'} shadow-sm hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
           >
             <ShoppingCart/>
