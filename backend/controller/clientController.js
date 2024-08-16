@@ -62,7 +62,7 @@ exports.verify = (req, res)=>{
             db.query('select * from clientlist where id = ?', [decode.id], (err, result)=>{
                 if(err) throw err
                 else{
-                    res.json(result)
+                    res.json(result[0])
                 }
             })
         })

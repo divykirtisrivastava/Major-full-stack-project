@@ -7,7 +7,7 @@ import {  useNavigate } from 'react-router-dom'
 export default function Home() {
     let [data, setData] = useState([])
     let [inp, setInp] = useState('')
-    let {isClientLogin} =  useContext(UserContext)
+    let {isClientLogin, auth} =  useContext(UserContext)
     let navigation = useNavigate()
 
     async function getData(){
@@ -17,7 +17,7 @@ export default function Home() {
     useEffect(()=>{
         getData()
         getCart()
-    }, [])
+    }, [auth])
  async function filterShoes(){
   let result = await axios.get('http://localhost:3000/api/getProduct')
   let final = result.data.filter((item)=> item.productType == "shoes")
@@ -35,8 +35,9 @@ export default function Home() {
 }
 
 async function handleCart(data) {
- if(isClientLogin){
-  await axios.post('http://localhost:3000/api/cartSave', data)
+ if(auth.user){
+  let username = auth.user.email.split('@')[0]
+  await axios.post(`http://localhost:3000/api/cartSave/${username}`, data)
   alert("item saved into cart..")
   getCart()
  }else{
@@ -46,11 +47,13 @@ async function handleCart(data) {
 
 //cart item count
 let {setCartList} = useContext(UserContext)
-
-    async function getCart(){
-        let result = await axios.get('http://localhost:3000/api/getCart')
+async function getCart(){
+  if(auth.user){
+         let username = auth.user.email.split('@')[0]
+        let result = await axios.get(`http://localhost:3000/api/getCart/${username}`)
         
         setCartList(result.data.length)
+       }
     }
 
 // search Bar

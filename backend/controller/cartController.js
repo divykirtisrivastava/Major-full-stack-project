@@ -1,6 +1,7 @@
 let db  = require('../dataBaseConfig.js')
 
 exports.cartSave = (req, res)=>{
+    let username = req.params.username
     let productType = req.body.productType
     let productBrand = req.body.productBrand
     let productPrice = req.body.productPrice
@@ -9,7 +10,7 @@ exports.cartSave = (req, res)=>{
 
     let value = [[productType,productBrand, productPrice, productRating, image]]
 
-    let sql  = 'insert into cart(productType,productBrand, productPrice, productRating, image) values ?'
+    let sql  = `insert into ${username}(productType,productBrand, productPrice, productRating, image) values ?`
 
     db.query(sql, [value], (err, result)=>{
         if(err) throw err
@@ -20,7 +21,8 @@ exports.cartSave = (req, res)=>{
 }
 
 exports.getCart = (req, res)=>{
-    let sql  = "select * from cart"
+    let username = req.params.username
+    let sql  = `select * from ${username}`
 
     db.query(sql, (err, result)=>{
         if(err) throw err
@@ -32,8 +34,9 @@ exports.getCart = (req, res)=>{
 
 exports.deleteCart = (req, res)=>{
     let id = req.params.id
+    let username = req.params.username
 
-    let sql = "delete from cart where id = ?"
+    let sql = `delete from ${username} where id = ?`
 
     db.query(sql, [id], (err, result)=>{
         if(err) throw err

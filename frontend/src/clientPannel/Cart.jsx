@@ -6,16 +6,20 @@ import UserContext from '../context/UserContext'
 
 export default function Cart() {
     let [data, setData] = useState([])
-    let {setCartList} = useContext(UserContext)
+    let {setCartList, auth} = useContext(UserContext)
 
     async function getData(){
-        let result = await axios.get('http://localhost:3000/api/getCart')
+       if(auth.user){
+        let username = auth.user.email.split('@')[0]
+
+        let result = await axios.get(`http://localhost:3000/api/getCart/${username}`)
         setData(result.data)
         setCartList(result.data.length)
+       }
     }
     useEffect(()=>{
         getData()
-    }, [])
+    }, [auth])
     // console.log(data.length)
 
     async function deleteData(id){
@@ -23,7 +27,8 @@ export default function Cart() {
       let flag  =  confirm("Are U sure to delete")
   
        if(flag == true){
-        await axios.delete(`http://localhost:3000/api/deleteCart/${id}`)
+        let username = auth.user.email.split('@')[0]
+        await axios.delete(`http://localhost:3000/api/deleteCart/${id}/${username}`)
         getData()
        }
       }

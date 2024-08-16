@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import axios from 'axios'
 import UserContext from '../context/UserContext'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function ClientLogin() {
   let {setIsClientLogin, clientLogin} = useContext(UserContext)
@@ -49,13 +49,13 @@ export default function ClientLogin() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 ">
             Don&apos;t have an account?{' '}
-            <a
-              href="#"
+            <Link
+              to="/register"
               title=""
               className="font-semibold text-black transition-all duration-200 hover:underline"
             >
               Create a free account
-            </a>
+            </Link>
           </p>
           <form  method="POST" onSubmit={handleSubmit} className="mt-8">
             <div className="space-y-5">

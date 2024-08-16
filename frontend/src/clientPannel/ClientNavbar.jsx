@@ -28,9 +28,10 @@ export default function ClientNavbar() {
   }
 
   let [flag , setflag] = useState(false)
-  let {cartList, isClientLogin} = useContext(UserContext)
+  let {cartList, isClientLogin, auth, logout} = useContext(UserContext)
 
   function handleLogout(){
+    logout()
     window.location.reload()
   }
 
@@ -68,19 +69,22 @@ export default function ClientNavbar() {
             ))}
           </ul>
         </div>
-        <div className="flex  gap-[50px] w-[350px] justify-evenly items-center">
-          <Link
+        <div className="flex  gap-[50px] w-[450px] justify-evenly items-center">
+         {auth.user &&  <Link
             type="button"
             to='/cart'  
             className={`rounded-md relative  px-3 py-2 text-sm font-semibold ${flag ? 'text-white' : 'text-black'} shadow-sm hover: focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
           >
             <ShoppingCart/>
             <span className='absolute top-[-10px] right-[10px]  text-red-600 text-xl'>{cartList ? cartList : ''}</span>
-          </Link>
+          </Link>}
           <div onClick={()=>setflag(!flag)}>
             {flag ?  <Moon/> :  <Sun/>}
           </div>
-          {isClientLogin ? <button onClick={handleLogout} className='p-2 bg-black text-white text-xl font-bold rounded'>Log Out</button> :
+         {auth.user ?  <div className='w-[50px] h-[50px] bg-black rounded-full'>
+            <img src={`http://localhost:3000/${auth.user.image}`} className='h-full w-full rounded-full' alt="" />
+          </div> : ''}
+          {auth.user ? <button onClick={handleLogout} className='p-2 bg-black text-white text-xl font-bold rounded'>Log Out</button> :
           <Link  to='/clientLogin' className='p-2 bg-black text-white text-xl font-bold rounded'>Log in</Link>}
         </div>
         <div className="lg:hidden">
